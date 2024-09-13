@@ -3,9 +3,10 @@ import React, { useState } from 'react';
 function Result() {
   const [output, setOutput] = useState("0");
   function display(num){
-    if(output===0){
 
-      setOutput(output.slice(1), num);
+    if(output==="0" || output==='Invalid input'){
+
+      setOutput(num);
     }
     else{
     setOutput(output+num);
@@ -16,14 +17,22 @@ function Result() {
   function equal_to(){
     // console.log(eval(output));
     try {
-      let ans=eval(output);
+      let ans=String(eval(output));
+      console.log(typeof(ans));
+      
       setOutput(ans);
     } catch (error) {
       setOutput("Invalid input");
     }
   }
   function deleteValue(){
-       setOutput(output.slice(0,-1))
+      if(output!="0"){
+        setOutput(output.slice(0,-1))
+      }
+      else{
+        setOutput('0');
+      }
+       
   }
 
   return (
