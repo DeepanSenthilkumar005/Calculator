@@ -1,8 +1,8 @@
 .App{
     display: flex;
     background-color: whitesmoke;
-    height: 45vh;
-    width: 20vw;
+    height:fit-content;
+    width:fit-content;
     justify-content: center;
     align-items: center;
 }

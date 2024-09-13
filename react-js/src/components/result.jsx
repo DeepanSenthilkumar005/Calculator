@@ -1,6 +1,6 @@
 import React, { useState,useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../components/result.css'
+import './result.css'
 function Result() {
   const [output, setOutput] = useState("0");
   const [val,setval]=useState(true);
@@ -65,6 +65,7 @@ function Result() {
         }
         // key==='Enter' && equal_to();
         // key==='Backspace' && deleteValue();
+        // if(key==='=') { equal_to();}
     };
 
     // Add event listener for keydown
@@ -84,10 +85,13 @@ function Result() {
       <div className='container'>
           <div className=' row '>
             {/* <p>{output} </p> */}
+            <div className="col">
             <input type="text" value={output} readOnly/>
+            </div>
+            
           </div>
           <div className='buttons'>
-          <button className='btn btn-danger text-dark' onClick={()=>clear()}>AC</button>   
+          <button className='btn btn-danger text-dark ' onClick={()=>clear()}>AC</button>   
           <button className='btn btn-warning' onClick={()=>deleteValue()}>C</button>
           <button className='btn btn-secondary' onClick={()=>bracket()}>()</button>
           <button className='btn btn-secondary' onClick={()=>display('/')}>÷</button>  
