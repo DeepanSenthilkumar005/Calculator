@@ -4,7 +4,7 @@ import Result from './components/result.jsx';
 
 function App() {
   return (
-    <div className="App m-auto">
+    <div className="App">
       <Result />
     </div>
   );

@@ -4,19 +4,29 @@ import './result.css'
 function Result() {
   const [output, setOutput] = useState("0");
   const [val,setval]=useState(true);
-  function display(num){
 
-    if(output==="0" || output==='Invalid input' || output==="Infinity"){
+  // Display the text
+  function display(num){
+    if(num==='/' || num==='*' || num==='+' || num==='-' || num==='%'){
+      setOutput(output+num);
+    }
+
+    else if(output==="0" || output==='Invalid input' || output==="Infinity"){
 
       setOutput(num);
     }
     else{
     setOutput(output+num);
-  }}
+  }
+}
+
+// Used to clear all the value in the text
   function clear(){
     setOutput("0");
     setval(true);
   }
+
+  // It is used to find the answer for the calculation
   function equal_to(){
     // console.log(eval(output));
     try {
@@ -29,6 +39,8 @@ function Result() {
       // alert("Enter a valid Input")
     }
   }
+
+  // Used for the bracket calculation
   function bracket(){
     if(val){
       setOutput(output+'*(');
@@ -40,7 +52,21 @@ function Result() {
     }
 
   }
+
+  // Used to delete the last value
   function deleteValue(){
+      if(output[output.length-1]===")")
+      {
+        setval(false)
+      }
+      if(output[output.length-1]==="(")
+        {
+          setOutput(output.slice(0,-1))
+          setval(true)
+        }
+      
+      // console.log(output[output.length-1]);
+      
       if(output!=="0"){
         setOutput(output.slice(0,-1))
       }
@@ -52,46 +78,23 @@ function Result() {
       }
   }
  
-  // <input type='text' ></input>
 
 
-  useEffect(() => {
-    const handleKeydown = (event) => {
-        const key = event.key;
-
-        // Update the input field with the pressed key
-        if (['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', '-', '*', '/','%','(',')'].includes(key)) {
-            setOutput((prevInput) => prevInput + key);
-        }
-        // key==='Enter' && equal_to();
-        // key==='Backspace' && deleteValue();
-        // if(key==='=') { equal_to();}
-    };
-
-    // Add event listener for keydown
-    document.addEventListener('keydown', handleKeydown);
-
-    // Cleanup event listener on component unmount
-    return () => {
-        document.removeEventListener('keydown', handleKeydown);
-    };
-}, []);
-
-
-
+ 
   return (
     <>
-    
+    <div className='con'>
       <div className='container'>
-          <div className=' row '>
+          <div className='row'>
             {/* <p>{output} </p> */}
             <div className="col">
-            <input type="text" value={output} readOnly/>
+  
+            <input type="text" className='dispaly text-light bg-dark' value={output} readOnly/>
             </div>
-            
+            <br></br>
           </div>
           <div className='buttons'>
-          <button className='btn btn-danger text-dark ' onClick={()=>clear()}>AC</button>   
+          <button className='btn btn-danger text-light ' onClick={()=>clear()}>AC</button>   
           <button className='btn btn-warning' onClick={()=>deleteValue()}>C</button>
           <button className='btn btn-secondary' onClick={()=>bracket()}>()</button>
           <button className='btn btn-secondary' onClick={()=>display('/')}>÷</button>  
@@ -123,7 +126,7 @@ function Result() {
           </div>
       </div>
     
-    
+      </div>
     </>
   );
 };
